@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/@neodrag/vanilla@latest/dist/umd/index.js"></script>
+    <title><%= title %></title>
+  </head>
+
+  <body>
+    <style>
+      @page {
+        .resize-handle {
+          display: none;
+        }
+      }
+
+      .resize-handle {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 0px;
+        height: 0px;
+        /* background-color: lightgray; */
+        cursor: se-resize;
+        opacity: 0;
+        /* Indicates resizability */
+      }
+
+      ::-webkit-resizer {
+
+        background: none;
+ 
+
+
+      }
+
+      .text-drag {
+      }
+
+      .drag {
+        text-align: justify;
+        position: absolute;
+        resize: both;
+        position: absolute;
+        overflow: auto;
+        width: 100px;
+      }
+
+      .drag:hover {
+        cursor: grab;
+      }
+
+      img {
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+        /* pointer-events: none; */
+        width: 100%;
+
+        /* Also prevents right-click */
+      }
+    </style>
+    <div>
+      <% images.forEach(image=> { %>
+      <div class="drag">
+        <img
+          class="handle"
+          src="public/images/<%= contentDir %>/<%= image %>"
+        />
+        <div class="resize-handle"></div>
+      </div>
+
+      <% }); %> <% textObjects.forEach(text=> { %>
+      <div class="drag text-drag">
+        <div class="handle"><%- text %></div>
+        <div class="resize-handle"></div>
+      </div>
+      <% }); %>
+    </div>
+
+    <script>
+      document.addEventListener("keydown", (e) => {
+        // Check for Ctrl+S (Windows/Linux) or Cmd+S (Mac)
+        if ((e.ctrlKey || e.metaKey) && e.key === "s") {
+          e.preventDefault(); // Prevent browser's default save dialog
+
+          // cmd/ctrl s to local storage
+          console.log("Save triggered!");
+        }
+      });
+
+      let lastDragged;
+      let zIndex = 1000000;
+      let lowestZindex = 1000000;
+
+      let draggableDivs = document.querySelectorAll(".drag");
+
+      draggableDivs.forEach((element, i) => {
+        element.style.zIndex = zIndex;
+        element.addEventListener("mousedown", (event) => {
+          console.log("t");
+
+          if (!(element === lastDragged)) {
+            zIndex++;
+            lowestZindex--;
+          }
+
+          element.style.zIndex = zIndex;
+          lastDragged = element;
+        });
+        new NeoDrag.Draggable(element, {
+          legacyTranslate: true,
+          gpuAcceleration: false,
+          handle: ".handle",
+          // bounds: 'parent',
+        });
+      });
+
+    </script>
+  </body>
+</html>
