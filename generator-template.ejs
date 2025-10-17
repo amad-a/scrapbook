@@ -4,15 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/@neodrag/vanilla@latest/dist/umd/index.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&family=Playwrite+AU+TAS:wght@100..400&display=swap"
+      rel="stylesheet"
+    />
+
     <title><%= title %></title>
   </head>
 
   <body>
     <style>
-      @page {
-        .resize-handle {
-          display: none;
-        }
+      h1 {
+        background-image: url("public/images/lined-paper.png");
+        /* Replace with your image path */
+        background-repeat: repeat-x;
+        /* Repeat vertically to create multiple lines */
+        background-size: cover;
+        font-family: "Playwrite AU TAS", cursive;
+        font-optical-sizing: auto;
+        font-style: normal;
+        font-weight: bolder;
+        margin: 0px;
       }
 
       .resize-handle {
@@ -28,14 +42,8 @@
       }
 
       ::-webkit-resizer {
-
         background: none;
- 
-
-
-      }
-
-      .text-drag {
+        background: pink;
       }
 
       .drag {
@@ -44,7 +52,15 @@
         resize: both;
         position: absolute;
         overflow: auto;
-        width: 100px;
+        width: 200px;
+      }
+
+      .text-drag {
+        background-color: white;
+        border: 1px solid black;
+        padding: 8px;
+        font-family: sans-serif;
+
       }
 
       .drag:hover {
@@ -116,8 +132,40 @@
           handle: ".handle",
           // bounds: 'parent',
         });
-      });
 
+        const aspectRatio = element.offsetWidth / element.offsetHeight;
+
+        let resizeTimer;
+        const handleResize = (entries) => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => {
+            // This code will execute only after a short delay (e.g., 200ms)
+            // without any further resize events. This simulates "resize end".
+            entries.forEach((entry) => {
+              console.log("Resize ended for:", entry.target);
+              console.log("new size", entry.target);
+              if (
+                entry.contentBoxSize[0].blockSize >
+                entry.target.querySelector("img").clientHeight
+              ) {
+                entry.target.style.height = `${
+                  entry.target.querySelector("img").clientHeight
+                }px`;
+              }
+            });
+          }, 200); // Adjust the debounce delay as needed
+        };
+
+        if (element.querySelector("img")) {
+          console.log("im el found", element);
+
+          const observer = new ResizeObserver((entries) => {
+            handleResize(entries);
+          });
+
+          observer.observe(element);
+        }
+      });
     </script>
   </body>
 </html>
