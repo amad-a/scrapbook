@@ -1,171 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://unpkg.com/@neodrag/vanilla@latest/dist/umd/index.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&family=Playwrite+AU+TAS:wght@100..400&display=swap"
-      rel="stylesheet"
-    />
 
-    <title><%= title %></title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://unpkg.com/@neodrag/vanilla@latest/dist/umd/index.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&family=Playwrite+AU+TAS:wght@100..400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/98.css" />
 
-  <body>
-    <style>
-      h1 {
-        background-image: url("public/images/lined-paper.png");
-        /* Replace with your image path */
-        background-repeat: repeat-x;
-        /* Repeat vertically to create multiple lines */
-        background-size: cover;
-        font-family: "Playwrite AU TAS", cursive;
-        font-optical-sizing: auto;
-        font-style: normal;
-        font-weight: bolder;
-        margin: 0px;
-      }
+  <title>
+    <%= title %>
+  </title>
+</head>
 
-      .resize-handle {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 0px;
-        height: 0px;
-        /* background-color: lightgray; */
-        cursor: se-resize;
-        opacity: 0;
-        /* Indicates resizability */
-      }
+<body>
+  <style>
+    body {
+      height: 100%;
+    }
 
-      ::-webkit-resizer {
-        background: none;
-        background: pink;
-      }
+    h1 {}
 
-      .drag {
-        text-align: justify;
-        position: absolute;
-        resize: both;
-        position: absolute;
-        overflow: auto;
-        width: 200px;
-      }
+    .resize-handle {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0px;
+      height: 0px;
+      /* background-color: lightgray; */
+      cursor: se-resize;
+      opacity: 0;
+      /* Indicates resizability */
+    }
 
-      .text-drag {
-        background-color: white;
-        border: 1px solid black;
-        padding: 8px;
-        font-family: sans-serif;
+    ::-webkit-resizer {
+      background: none;
+      background: pink;
+    }
 
-      }
+    .drag {
+      text-align: justify;
+      position: absolute;
+      resize: both;
+      position: absolute;
+      width: 200px;
+      overflow: hidden;
+    }
 
-      .drag:hover {
-        cursor: grab;
-      }
+    .text-drag {
+      background-color: white;
+      border: 1px solid black;
+      padding: 8px;
+      font-family: sans-serif;
+      overflow: auto;
+    }
 
-      img {
-        -webkit-user-drag: none;
-        -khtml-user-drag: none;
-        -moz-user-drag: none;
-        -o-user-drag: none;
-        /* pointer-events: none; */
-        width: 100%;
+    .drag:hover {
+      cursor: grab;
+    }
 
-        /* Also prevents right-click */
-      }
-    </style>
-    <div>
-      <% images.forEach(image=> { %>
-      <div class="drag">
-        <img
-          class="handle"
-          src="public/images/<%= contentDir %>/<%= image %>"
-        />
+    img {
+      -webkit-user-drag: none;
+      -khtml-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+      /* pointer-events: none; */
+      width: 100%;
+
+      /* Also prevents right-click */
+    }
+  </style>
+  <div>
+    <% images.forEach((image, index)=> { %>
+      <div class="drag" id="img-<%- index %>">
+        <img class="handle" src="public/images/<%= contentDir %>/<%= image %>" />
         <div class="resize-handle"></div>
       </div>
 
-      <% }); %> <% textObjects.forEach(text=> { %>
-      <div class="drag text-drag">
-        <div class="handle"><%- text %></div>
-        <div class="resize-handle"></div>
-      </div>
       <% }); %>
-    </div>
+        <% textObjects.forEach((text, index)=> { %>
+          <div class="drag text-drag" id="text-<%- index %>">
+            <div class="handle"><%- text %></div>
+            <div class="resize-handle"></div>
+          </div>
+          <% }); %>
+  </div>
 
-    <script>
-      document.addEventListener("keydown", (e) => {
-        // Check for Ctrl+S (Windows/Linux) or Cmd+S (Mac)
-        if ((e.ctrlKey || e.metaKey) && e.key === "s") {
-          e.preventDefault(); // Prevent browser's default save dialog
+  <script>
+    let savedCoords = JSON.parse(localStorage.getItem("coordinates")) || [];
 
-          // cmd/ctrl s to local storage
-          console.log("Save triggered!");
+
+    console.log("saved Coords", savedCoords);
+    document.addEventListener("keydown", (e) => {
+      // Check for Ctrl+S (Windows/Linux) or Cmd+S (Mac)
+      if ((e.ctrlKey || e.metaKey) && e.key === "s") {
+        e.preventDefault(); // Prevent browser's default save dialog
+
+        // cmd/ctrl s to local storage
+        console.log("Save triggered!");
+        const dragElems = document.querySelectorAll('.drag');
+
+        savedCoords = [];
+
+        dragElems.forEach((elem) => {
+          savedCoords.push({ 'id': elem.id, 'transform': elem.style.transform })
+          localStorage.setItem("coordinates", JSON.stringify(savedCoords));
+        });
+
+      }
+    });
+
+    let lastDragged;
+    let zIndex = 1000000;
+    let lowestZindex = 1000000;
+
+    let draggableDivs = document.querySelectorAll(".drag");
+
+    function extractTranslateValues(translateStr) {
+      const matches = translateStr.match(/-?\d+\.?\d*/g);
+      return matches ? matches.map(Number) : [];
+    }
+
+    draggableDivs.forEach((element, i) => {
+
+      let foundElem = savedCoords.find(elem => elem.id === element.id);
+      console.log('draggable found elem', foundElem);
+
+      let extractedCoords = extractTranslateValues(foundElem.transform);
+      element.style.zIndex = zIndex;
+      element.addEventListener("mousedown", (event) => {
+
+
+
+        if (!(element === lastDragged)) {
+          zIndex++;
+          lowestZindex--;
         }
-      });
 
-      let lastDragged;
-      let zIndex = 1000000;
-      let lowestZindex = 1000000;
-
-      let draggableDivs = document.querySelectorAll(".drag");
-
-      draggableDivs.forEach((element, i) => {
         element.style.zIndex = zIndex;
-        element.addEventListener("mousedown", (event) => {
-          console.log("t");
-
-          if (!(element === lastDragged)) {
-            zIndex++;
-            lowestZindex--;
-          }
-
-          element.style.zIndex = zIndex;
-          lastDragged = element;
-        });
-        new NeoDrag.Draggable(element, {
-          legacyTranslate: true,
-          gpuAcceleration: false,
-          handle: ".handle",
-          // bounds: 'parent',
-        });
-
-        const aspectRatio = element.offsetWidth / element.offsetHeight;
-
-        let resizeTimer;
-        const handleResize = (entries) => {
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(() => {
-            // This code will execute only after a short delay (e.g., 200ms)
-            // without any further resize events. This simulates "resize end".
-            entries.forEach((entry) => {
-              console.log("Resize ended for:", entry.target);
-              console.log("new size", entry.target);
-              if (
-                entry.contentBoxSize[0].blockSize >
-                entry.target.querySelector("img").clientHeight
-              ) {
-                entry.target.style.height = `${
-                  entry.target.querySelector("img").clientHeight
-                }px`;
-              }
-            });
-          }, 200); // Adjust the debounce delay as needed
-        };
-
-        if (element.querySelector("img")) {
-          console.log("im el found", element);
-
-          const observer = new ResizeObserver((entries) => {
-            handleResize(entries);
-          });
-
-          observer.observe(element);
-        }
+        lastDragged = element;
       });
-    </script>
-  </body>
+      new NeoDrag.Draggable(element, {
+        position: { x: extractedCoords[0], y: extractedCoords[1]},
+        legacyTranslate: true,
+        gpuAcceleration: false,
+        handle: ".handle",
+        // bounds: 'parent',
+      });
+
+      const aspectRatio = element.offsetWidth / element.offsetHeight;
+
+      let resizeTimer;
+      const handleResize = (entries) => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          // This code will execute only after a short delay (e.g., 200ms)
+          // without any further resize events. This simulates "resize end".
+          entries.forEach((entry) => {
+            if (
+              entry.contentBoxSize[0].blockSize >
+              entry.target.querySelector("img").clientHeight
+            ) {
+              entry.target.style.height = `${entry.target.querySelector("img").clientHeight
+                }px`;
+            }
+          });
+        }, 200); // Adjust the debounce delay as needed
+      };
+
+      if (element.querySelector("img")) {
+        const observer = new ResizeObserver((entries) => {
+          handleResize(entries);
+        });
+        observer.observe(element);
+      }
+    });
+
+    // savedCoords.forEach(elem => {
+    //   let foundElem = document.querySelector(`#${elem.id}`);
+    //   foundElem.style.transform = elem.transform;
+    //   console.log('found!', foundElem.style.transform);
+
+    //   // .style.transform = elem.transform;
+    // })
+  </script>
+</body>
+
 </html>

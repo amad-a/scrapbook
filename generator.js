@@ -5,7 +5,6 @@ const outputDir = "./";
 const textObjects = [
     '<div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis impedit optio ipsa molestiae, neque vel, velit, itaque ullam nesciunt esse error perspiciatis delectus magni veritatis rerum! Eaque, omnis ipsam! Eaque!</div>',
     '<div><a href="https://google.com">google this!</a></div>',
-    '<h1>Mohiedden</h1>'
 ]
 
 
@@ -20,11 +19,10 @@ function readImageDirs() {
       fs.readdir(`public/images/${dirName}`, (err, dir) => {
         let htmlContent = "";
         if (dir?.length > 0) {
-          console.log("DRRR", dirName);
           const htmlContent = ejs.renderFile(
             "generator-template.ejs",
             {
-              title: "titty",
+              title: dirName,
               images: dir,
               contentDir: dirName,
               textObjects: textObjects

@@ -1,325 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://unpkg.com/@neodrag/vanilla@latest/dist/umd/index.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&family=Playwrite+AU+TAS:wght@100..400&display=swap"
-      rel="stylesheet"
-    />
 
-    <title>titty</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://unpkg.com/@neodrag/vanilla@latest/dist/umd/index.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&family=Playwrite+AU+TAS:wght@100..400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/98.css" />
 
-  <body>
-    <style>
-      h1 {
-        background-image: url("public/images/lined-paper.png");
-        /* Replace with your image path */
-        background-repeat: repeat-x;
-        /* Repeat vertically to create multiple lines */
-        background-size: cover;
-        font-family: "Playwrite AU TAS", cursive;
-        font-optical-sizing: auto;
-        font-style: normal;
-        font-weight: bolder;
-        margin: 0px;
+  <title>
+    cats-test
+  </title>
+</head>
+
+<body>
+  <style>
+    body {
+      height: 100%;
+    }
+
+    h1 {}
+
+    .resize-handle {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0px;
+      height: 0px;
+      /* background-color: lightgray; */
+      cursor: se-resize;
+      opacity: 0;
+      /* Indicates resizability */
+    }
+
+    ::-webkit-resizer {
+      background: none;
+      background: pink;
+    }
+
+    .drag {
+      text-align: justify;
+      position: absolute;
+      resize: both;
+      position: absolute;
+      width: 200px;
+      overflow: hidden;
+    }
+
+    .text-drag {
+      background-color: white;
+      border: 1px solid black;
+      padding: 8px;
+      font-family: sans-serif;
+      overflow: auto;
+    }
+
+    .drag:hover {
+      cursor: grab;
+    }
+
+    img {
+      -webkit-user-drag: none;
+      -khtml-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+      /* pointer-events: none; */
+      width: 100%;
+
+      /* Also prevents right-click */
+    }
+  </style>
+  <div>
+    
+      <div class="drag" id="img-0">
+        <img class="handle" src="public/images/cats-test/billi-churu.jpg" />
+        <div class="resize-handle"></div>
+      </div>
+
+      
+      <div class="drag" id="img-1">
+        <img class="handle" src="public/images/cats-test/bunny-karachi.jpg" />
+        <div class="resize-handle"></div>
+      </div>
+
+      
+      <div class="drag" id="img-2">
+        <img class="handle" src="public/images/cats-test/choop-the-original.jpg" />
+        <div class="resize-handle"></div>
+      </div>
+
+      
+      <div class="drag" id="img-3">
+        <img class="handle" src="public/images/cats-test/cozy-cleo.jpg" />
+        <div class="resize-handle"></div>
+      </div>
+
+      
+      <div class="drag" id="img-4">
+        <img class="handle" src="public/images/cats-test/hes-all-in.jpg" />
+        <div class="resize-handle"></div>
+      </div>
+
+      
+      <div class="drag" id="img-5">
+        <img class="handle" src="public/images/cats-test/joey-roof-cat.jpg" />
+        <div class="resize-handle"></div>
+      </div>
+
+      
+      <div class="drag" id="img-6">
+        <img class="handle" src="public/images/cats-test/jumma-rufus.jpg" />
+        <div class="resize-handle"></div>
+      </div>
+
+      
+      <div class="drag" id="img-7">
+        <img class="handle" src="public/images/cats-test/laika.jpg" />
+        <div class="resize-handle"></div>
+      </div>
+
+      
+      <div class="drag" id="img-8">
+        <img class="handle" src="public/images/cats-test/lala.jpg" />
+        <div class="resize-handle"></div>
+      </div>
+
+      
+      <div class="drag" id="img-9">
+        <img class="handle" src="public/images/cats-test/layla-discovery.jpg" />
+        <div class="resize-handle"></div>
+      </div>
+
+      
+      <div class="drag" id="img-10">
+        <img class="handle" src="public/images/cats-test/lulu-ridgewood.jpg" />
+        <div class="resize-handle"></div>
+      </div>
+
+      
+      <div class="drag" id="img-11">
+        <img class="handle" src="public/images/cats-test/mr-mustache-zooted.jpg" />
+        <div class="resize-handle"></div>
+      </div>
+
+      
+      <div class="drag" id="img-12">
+        <img class="handle" src="public/images/cats-test/ridgewood-tabby.jpg" />
+        <div class="resize-handle"></div>
+      </div>
+
+      
+      <div class="drag" id="img-13">
+        <img class="handle" src="public/images/cats-test/sultry-sultan.jpg" />
+        <div class="resize-handle"></div>
+      </div>
+
+      
+      <div class="drag" id="img-14">
+        <img class="handle" src="public/images/cats-test/the-myrtle-wyckoff-chonker.jpg" />
+        <div class="resize-handle"></div>
+      </div>
+
+      
+      <div class="drag" id="img-15">
+        <img class="handle" src="public/images/cats-test/tiga-flatbush-rip.jpg" />
+        <div class="resize-handle"></div>
+      </div>
+
+      
+      <div class="drag" id="img-16">
+        <img class="handle" src="public/images/cats-test/tony-catsitting.jpg" />
+        <div class="resize-handle"></div>
+      </div>
+
+      
+        
+          <div class="drag text-drag" id="text-0">
+            <div class="handle"><div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis impedit optio ipsa molestiae, neque vel, velit, itaque ullam nesciunt esse error perspiciatis delectus magni veritatis rerum! Eaque, omnis ipsam! Eaque!</div></div>
+            <div class="resize-handle"></div>
+          </div>
+          
+          <div class="drag text-drag" id="text-1">
+            <div class="handle"><div><a href="https://google.com">google this!</a></div></div>
+            <div class="resize-handle"></div>
+          </div>
+          
+  </div>
+
+  <script>
+    let savedCoords = JSON.parse(localStorage.getItem("coordinates")) || [];
+
+
+    console.log("saved Coords", savedCoords);
+    document.addEventListener("keydown", (e) => {
+      // Check for Ctrl+S (Windows/Linux) or Cmd+S (Mac)
+      if ((e.ctrlKey || e.metaKey) && e.key === "s") {
+        e.preventDefault(); // Prevent browser's default save dialog
+
+        // cmd/ctrl s to local storage
+        console.log("Save triggered!");
+        const dragElems = document.querySelectorAll('.drag');
+
+        savedCoords = [];
+
+        dragElems.forEach((elem) => {
+          savedCoords.push({ 'id': elem.id, 'transform': elem.style.transform })
+          localStorage.setItem("coordinates", JSON.stringify(savedCoords));
+        });
+
       }
+    });
 
-      .resize-handle {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 0px;
-        height: 0px;
-        /* background-color: lightgray; */
-        cursor: se-resize;
-        opacity: 0;
-        /* Indicates resizability */
-      }
+    let lastDragged;
+    let zIndex = 1000000;
+    let lowestZindex = 1000000;
 
-      ::-webkit-resizer {
-        background: none;
-        background: pink;
-      }
+    let draggableDivs = document.querySelectorAll(".drag");
 
-      .drag {
-        text-align: justify;
-        position: absolute;
-        resize: both;
-        position: absolute;
-        overflow: auto;
-        width: 200px;
-      }
+    function extractTranslateValues(translateStr) {
+      const matches = translateStr.match(/-?\d+\.?\d*/g);
+      return matches ? matches.map(Number) : [];
+    }
 
-      .text-drag {
-        background-color: white;
-        border: 1px solid black;
-        padding: 8px;
-        font-family: sans-serif;
+    draggableDivs.forEach((element, i) => {
 
-      }
+      let foundElem = savedCoords.find(elem => elem.id === element.id);
+      console.log('draggable found elem', foundElem);
 
-      .drag:hover {
-        cursor: grab;
-      }
+      let extractedCoords = extractTranslateValues(foundElem.transform);
+      element.style.zIndex = zIndex;
+      element.addEventListener("mousedown", (event) => {
 
-      img {
-        -webkit-user-drag: none;
-        -khtml-user-drag: none;
-        -moz-user-drag: none;
-        -o-user-drag: none;
-        /* pointer-events: none; */
-        width: 100%;
 
-        /* Also prevents right-click */
-      }
-    </style>
-    <div>
-      
-      <div class="drag">
-        <img
-          class="handle"
-          src="public/images/cats-test/billi-churu.jpg"
-        />
-        <div class="resize-handle"></div>
-      </div>
 
-      
-      <div class="drag">
-        <img
-          class="handle"
-          src="public/images/cats-test/bunny-karachi.jpg"
-        />
-        <div class="resize-handle"></div>
-      </div>
-
-      
-      <div class="drag">
-        <img
-          class="handle"
-          src="public/images/cats-test/choop-the-original.jpg"
-        />
-        <div class="resize-handle"></div>
-      </div>
-
-      
-      <div class="drag">
-        <img
-          class="handle"
-          src="public/images/cats-test/cozy-cleo.jpg"
-        />
-        <div class="resize-handle"></div>
-      </div>
-
-      
-      <div class="drag">
-        <img
-          class="handle"
-          src="public/images/cats-test/hes-all-in.jpg"
-        />
-        <div class="resize-handle"></div>
-      </div>
-
-      
-      <div class="drag">
-        <img
-          class="handle"
-          src="public/images/cats-test/joey-roof-cat.jpg"
-        />
-        <div class="resize-handle"></div>
-      </div>
-
-      
-      <div class="drag">
-        <img
-          class="handle"
-          src="public/images/cats-test/jumma-rufus.jpg"
-        />
-        <div class="resize-handle"></div>
-      </div>
-
-      
-      <div class="drag">
-        <img
-          class="handle"
-          src="public/images/cats-test/laika.jpg"
-        />
-        <div class="resize-handle"></div>
-      </div>
-
-      
-      <div class="drag">
-        <img
-          class="handle"
-          src="public/images/cats-test/lala.jpg"
-        />
-        <div class="resize-handle"></div>
-      </div>
-
-      
-      <div class="drag">
-        <img
-          class="handle"
-          src="public/images/cats-test/layla-discovery.jpg"
-        />
-        <div class="resize-handle"></div>
-      </div>
-
-      
-      <div class="drag">
-        <img
-          class="handle"
-          src="public/images/cats-test/lulu-ridgewood.jpg"
-        />
-        <div class="resize-handle"></div>
-      </div>
-
-      
-      <div class="drag">
-        <img
-          class="handle"
-          src="public/images/cats-test/mr-mustache-zooted.jpg"
-        />
-        <div class="resize-handle"></div>
-      </div>
-
-      
-      <div class="drag">
-        <img
-          class="handle"
-          src="public/images/cats-test/ridgewood-tabby.jpg"
-        />
-        <div class="resize-handle"></div>
-      </div>
-
-      
-      <div class="drag">
-        <img
-          class="handle"
-          src="public/images/cats-test/sultry-sultan.jpg"
-        />
-        <div class="resize-handle"></div>
-      </div>
-
-      
-      <div class="drag">
-        <img
-          class="handle"
-          src="public/images/cats-test/the-myrtle-wyckoff-chonker.jpg"
-        />
-        <div class="resize-handle"></div>
-      </div>
-
-      
-      <div class="drag">
-        <img
-          class="handle"
-          src="public/images/cats-test/tiga-flatbush-rip.jpg"
-        />
-        <div class="resize-handle"></div>
-      </div>
-
-      
-      <div class="drag">
-        <img
-          class="handle"
-          src="public/images/cats-test/tony-catsitting.jpg"
-        />
-        <div class="resize-handle"></div>
-      </div>
-
-       
-      <div class="drag text-drag">
-        <div class="handle"><div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis impedit optio ipsa molestiae, neque vel, velit, itaque ullam nesciunt esse error perspiciatis delectus magni veritatis rerum! Eaque, omnis ipsam! Eaque!</div></div>
-        <div class="resize-handle"></div>
-      </div>
-      
-      <div class="drag text-drag">
-        <div class="handle"><div><a href="https://google.com">google this!</a></div></div>
-        <div class="resize-handle"></div>
-      </div>
-      
-      <div class="drag text-drag">
-        <div class="handle"><h1>Mohiedden</h1></div>
-        <div class="resize-handle"></div>
-      </div>
-      
-    </div>
-
-    <script>
-      document.addEventListener("keydown", (e) => {
-        // Check for Ctrl+S (Windows/Linux) or Cmd+S (Mac)
-        if ((e.ctrlKey || e.metaKey) && e.key === "s") {
-          e.preventDefault(); // Prevent browser's default save dialog
-
-          // cmd/ctrl s to local storage
-          console.log("Save triggered!");
+        if (!(element === lastDragged)) {
+          zIndex++;
+          lowestZindex--;
         }
-      });
 
-      let lastDragged;
-      let zIndex = 1000000;
-      let lowestZindex = 1000000;
-
-      let draggableDivs = document.querySelectorAll(".drag");
-
-      draggableDivs.forEach((element, i) => {
         element.style.zIndex = zIndex;
-        element.addEventListener("mousedown", (event) => {
-          console.log("t");
-
-          if (!(element === lastDragged)) {
-            zIndex++;
-            lowestZindex--;
-          }
-
-          element.style.zIndex = zIndex;
-          lastDragged = element;
-        });
-        new NeoDrag.Draggable(element, {
-          legacyTranslate: true,
-          gpuAcceleration: false,
-          handle: ".handle",
-          // bounds: 'parent',
-        });
-
-        const aspectRatio = element.offsetWidth / element.offsetHeight;
-
-        let resizeTimer;
-        const handleResize = (entries) => {
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(() => {
-            // This code will execute only after a short delay (e.g., 200ms)
-            // without any further resize events. This simulates "resize end".
-            entries.forEach((entry) => {
-              console.log("Resize ended for:", entry.target);
-              console.log("new size", entry.target);
-              if (
-                entry.contentBoxSize[0].blockSize >
-                entry.target.querySelector("img").clientHeight
-              ) {
-                entry.target.style.height = `${
-                  entry.target.querySelector("img").clientHeight
-                }px`;
-              }
-            });
-          }, 200); // Adjust the debounce delay as needed
-        };
-
-        if (element.querySelector("img")) {
-          console.log("im el found", element);
-
-          const observer = new ResizeObserver((entries) => {
-            handleResize(entries);
-          });
-
-          observer.observe(element);
-        }
+        lastDragged = element;
       });
-    </script>
-  </body>
+      new NeoDrag.Draggable(element, {
+        position: { x: extractedCoords[0], y: extractedCoords[1]},
+        legacyTranslate: true,
+        gpuAcceleration: false,
+        handle: ".handle",
+        // bounds: 'parent',
+      });
+
+      const aspectRatio = element.offsetWidth / element.offsetHeight;
+
+      let resizeTimer;
+      const handleResize = (entries) => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          // This code will execute only after a short delay (e.g., 200ms)
+          // without any further resize events. This simulates "resize end".
+          entries.forEach((entry) => {
+            if (
+              entry.contentBoxSize[0].blockSize >
+              entry.target.querySelector("img").clientHeight
+            ) {
+              entry.target.style.height = `${entry.target.querySelector("img").clientHeight
+                }px`;
+            }
+          });
+        }, 200); // Adjust the debounce delay as needed
+      };
+
+      if (element.querySelector("img")) {
+        const observer = new ResizeObserver((entries) => {
+          handleResize(entries);
+        });
+        observer.observe(element);
+      }
+    });
+
+    // savedCoords.forEach(elem => {
+    //   let foundElem = document.querySelector(`#${elem.id}`);
+    //   foundElem.style.transform = elem.transform;
+    //   console.log('found!', foundElem.style.transform);
+
+    //   // .style.transform = elem.transform;
+    // })
+  </script>
+</body>
+
 </html>
